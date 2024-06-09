@@ -1,0 +1,1 @@
+module github.com/idontknowtoobrother/safe_sqrt
