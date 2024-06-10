@@ -2,23 +2,31 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"log"
+
+	"github.com/idontknowtoobrother/exchange_currency_rate/db"
 )
 
 func main() {
-	var sentence string
-	fmt.Print("Enter sentence: ")
-	fmt.Scanln(&sentence)
-	words := strings.Fields(sentence)
+	var amountInUSD float64
+	fmt.Print("Enter amount in USD: ")
+	fmt.Scanf("%f", &amountInUSD)
 
-	freqWord := make(map[string]int)
+	var exchangeToCurrency string
+	fmt.Print("Enter currency to convert to (EUR, JPY, GBP): ")
+	fmt.Scanf("%s", &exchangeToCurrency)
 
-	for _, word := range words {
-		freqWord[word]++
+	currencyRates, err := db.GetCurrencyRate("USD")
+
+	if err != nil {
+		log.Fatal(err)
+		return
 	}
 
-	for word, freq := range freqWord {
-		fmt.Println(word, freq)
+	if currencyRates[exchangeToCurrency] == 0 {
+		log.Fatalf("Currency rate %s not found", exchangeToCurrency)
+		return
 	}
 
+	fmt.Printf("Converted amount: %.2f %s\n", amountInUSD*currencyRates[exchangeToCurrency], exchangeToCurrency)
 }
