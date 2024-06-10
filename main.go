@@ -1,32 +1,36 @@
 package main
 
-import (
-	"fmt"
-	"log"
-
-	"github.com/idontknowtoobrother/exchange_currency_rate/db"
-)
+import "fmt"
 
 func main() {
-	var amountInUSD float64
-	fmt.Print("Enter amount in USD: ")
-	fmt.Scanf("%f", &amountInUSD)
+	fmt.Println("Enter class and number of students (e.g., Math 30). Type 'end' to stop:")
 
-	var exchangeToCurrency string
-	fmt.Print("Enter currency to convert to (EUR, JPY, GBP): ")
-	fmt.Scanf("%s", &exchangeToCurrency)
+	mapStudentsCount := make(map[string]int)
+	for {
+		fmt.Print("[example: Math 30] - ")
+		var class string
+		var studentsCount int
+		_, err := fmt.Scanf("%s %d", &class, &studentsCount)
+		if err != nil && class != "end" {
+			fmt.Printf("Error: %v\n", err)
+			return
+		}
 
-	currencyRates, err := db.GetCurrencyRate("USD")
+		if class == "end" {
+			break
+		}
 
-	if err != nil {
-		log.Fatal(err)
-		return
+		_, exist := mapStudentsCount[class]
+		if exist {
+			mapStudentsCount[class] += studentsCount
+			continue
+		}
+
+		mapStudentsCount[class] = studentsCount
 	}
 
-	if currencyRates[exchangeToCurrency] == 0 {
-		log.Fatalf("Currency rate %s not found", exchangeToCurrency)
-		return
+	fmt.Println("Class and number of students:")
+	for class, studentsCount := range mapStudentsCount {
+		fmt.Printf("%s: %d\n", class, studentsCount)
 	}
-
-	fmt.Printf("Converted amount: %.2f %s\n", amountInUSD*currencyRates[exchangeToCurrency], exchangeToCurrency)
 }

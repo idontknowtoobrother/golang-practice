@@ -1,3 +1,3 @@
-module github.com/idontknowtoobrother/exchange_currency_rate
+module github.com/idontknowtoobrother/recognize_student_totals
 
 go 1.22.1
