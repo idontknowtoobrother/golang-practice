@@ -1,3 +1,3 @@
-module github.com/idontknowtoobrother/golang-practice/pointer-update-value-by-pointer
+module github.com/idontknowtoobrother/golang-practice/ptr-swap
 
 go 1.22.1

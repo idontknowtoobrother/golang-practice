@@ -2,13 +2,14 @@ package main
 
 import "fmt"
 
-func changeValueViaPointer(ref *int) {
-	*ref = 200
+func swap(value *int, toSwapValue *int) {
+	*value, *toSwapValue = *toSwapValue, *value
 }
 
 func main() {
-	a := 10
-	fmt.Println(a)
-	changeValueViaPointer(&a)
-	fmt.Println(a)
+	a, b := 10, 30
+	fmt.Printf("\na=%d, b=%d", a, b)
+	swap(&a, &b)
+	fmt.Printf("\na=%d, b=%d", a, b)
+
 }
