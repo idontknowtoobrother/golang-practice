@@ -2,39 +2,24 @@ package main
 
 import "fmt"
 
-func transposeMatrix(matrix *[][]int) {
-	rows := len(*matrix)
-	cols := len((*matrix)[0])
-
-	transposed := make([][]int, cols)
-
-	for i := range transposed {
-		transposed[i] = make([]int, rows)
-	}
-
-	for i := 0; i < rows; i++ {
-		for j := 0; j < cols; j++ {
-			transposed[j][i] = (*matrix)[i][j]
-		}
-	}
-
-	*matrix = transposed
+type Node struct {
+	Value int
+	Next  *Node
 }
 
 func main() {
 
-	var matrix [][]int = [][]int{
-		{1, 2, 3},
-		{4, 5, 6},
-	}
+	aNode := &Node{Value: 10}
+	bNode := &Node{Value: 20}
+	cNode := &Node{Value: 30}
+	aNode.Next = bNode
+	bNode.Next = cNode
 
-	fmt.Println("Original matrix:")
-	for _, row := range matrix {
-		fmt.Println(row)
-	}
-	transposeMatrix(&matrix)
-	fmt.Println("Transpose matrix:")
-	for _, row := range matrix {
-		fmt.Println(row)
+	fmt.Println(aNode.Value)
+	if aNode.Next != nil {
+		fmt.Println(aNode.Next.Value)
+		if bNode.Next != nil {
+			fmt.Println(bNode.Next.Value)
+		}
 	}
 }
