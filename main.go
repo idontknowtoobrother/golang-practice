@@ -2,23 +2,39 @@ package main
 
 import "fmt"
 
+func transposeMatrix(matrix *[][]int) {
+	rows := len(*matrix)
+	cols := len((*matrix)[0])
+
+	transposed := make([][]int, cols)
+
+	for i := range transposed {
+		transposed[i] = make([]int, rows)
+	}
+
+	for i := 0; i < rows; i++ {
+		for j := 0; j < cols; j++ {
+			transposed[j][i] = (*matrix)[i][j]
+		}
+	}
+
+	*matrix = transposed
+}
+
 func main() {
 
-	var arayyInteger [5]int = [5]int{
-		10,
-		20,
-		30,
-		40,
-		50,
+	var matrix [][]int = [][]int{
+		{1, 2, 3},
+		{4, 5, 6},
 	}
 
-	arrayPtrInteger := [5]*int{}
-
-	for i := range arayyInteger {
-		arrayPtrInteger[i] = &arayyInteger[i]
+	fmt.Println("Original matrix:")
+	for _, row := range matrix {
+		fmt.Println(row)
 	}
-
-	for i := range arrayPtrInteger {
-		fmt.Printf("Value at index %d: %d, Address: %p\n", i, *arrayPtrInteger[i], arrayPtrInteger[i])
+	transposeMatrix(&matrix)
+	fmt.Println("Transpose matrix:")
+	for _, row := range matrix {
+		fmt.Println(row)
 	}
 }
