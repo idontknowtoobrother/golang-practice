@@ -2,13 +2,13 @@ package main
 
 import "fmt"
 
-func changeValueViaPointer(ref *int) {
-	*ref = 200
+func updateValeByPtr(a *int) {
+	*a = 40
 }
 
 func main() {
 	a := 10
-	fmt.Println(a)
-	changeValueViaPointer(&a)
-	fmt.Println(a)
+	fmt.Println("before: ", a)
+	updateValeByPtr(&a)
+	fmt.Println("after: ", a)
 }
