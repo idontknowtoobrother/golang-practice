@@ -2,14 +2,23 @@ package main
 
 import "fmt"
 
-func swap(a *int, b *int) {
-	*a, *b = *b, *a
-}
-
 func main() {
-	a, b := 123, 321
-	fmt.Printf("\na: %d, b: %d", a, b)
-	swap(&a, &b)
-	fmt.Printf("\na: %d, b: %d", a, b)
 
+	var arayyInteger [5]int = [5]int{
+		10,
+		20,
+		30,
+		40,
+		50,
+	}
+
+	arrayPtrInteger := [5]*int{}
+
+	for i := range arayyInteger {
+		arrayPtrInteger[i] = &arayyInteger[i]
+	}
+
+	for i := range arrayPtrInteger {
+		fmt.Printf("Value at index %d: %d, Address: %p\n", i, *arrayPtrInteger[i], arrayPtrInteger[i])
+	}
 }
