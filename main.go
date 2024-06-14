@@ -7,19 +7,45 @@ type Node struct {
 	Next  *Node
 }
 
-func main() {
+type LinkedList struct {
+	Head *Node
+}
 
-	aNode := &Node{Value: 10}
-	bNode := &Node{Value: 20}
-	cNode := &Node{Value: 30}
-	aNode.Next = bNode
-	bNode.Next = cNode
+func (link *LinkedList) InsertBegin(value int) {
+	newNode := &Node{Value: value}
+	newNode.Next = link.Head
+	link.Head = newNode
+}
 
-	fmt.Println(aNode.Value)
-	if aNode.Next != nil {
-		fmt.Println(aNode.Next.Value)
-		if bNode.Next != nil {
-			fmt.Println(bNode.Next.Value)
-		}
+func (link *LinkedList) InsertEnd(value int) {
+	newNode := &Node{Value: value}
+	// LinkedList has only head
+	// if not have head we can't assign Next. Purpose of InsertEnd meaning insert to tail
+	// Imaging we use LinkedList but we didn't have Head how tf we possible can assign to the end
+	if link.Head == nil {
+		link.Head = newNode
+		return
 	}
+	current := link.Head
+	for current.Next != nil {
+		current = current.Next
+	}
+	current.Next = newNode
+}
+
+func (link *LinkedList) Log() {
+	cur := link.Head
+	for cur != nil {
+		fmt.Print(cur.Value, "-->")
+		cur = cur.Next
+	}
+	fmt.Println("nil")
+}
+
+func main() {
+	linkedList := &LinkedList{}
+	linkedList.InsertBegin(10)
+	linkedList.InsertBegin(30)
+	linkedList.Log()
+
 }
