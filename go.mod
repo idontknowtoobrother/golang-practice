@@ -1,3 +1,3 @@
-module github.com/idontknowtoobrother/recognize_student_totals
+module github.com/idontknowtoobrother/golang-practice
 
 go 1.22.1
