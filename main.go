@@ -2,14 +2,14 @@ package main
 
 import "fmt"
 
-func swap(value *int, toSwapValue *int) {
-	*value, *toSwapValue = *toSwapValue, *value
+func swap(a *int, b *int) {
+	*a, *b = *b, *a
 }
 
 func main() {
-	a, b := 10, 30
-	fmt.Printf("\na=%d, b=%d", a, b)
+	a, b := 123, 321
+	fmt.Printf("\na: %d, b: %d", a, b)
 	swap(&a, &b)
-	fmt.Printf("\na=%d, b=%d", a, b)
+	fmt.Printf("\na: %d, b: %d", a, b)
 
 }
