@@ -2,26 +2,32 @@ package main
 
 import "fmt"
 
-func increamentCount(mapItem map[string]*int, itemName string) {
-	if _, exist := mapItem[itemName]; !exist {
-		count := 0
-		mapItem[itemName] = &count
-	}
+type Address struct {
+	Street string
+	City   string
+}
 
-	*mapItem[itemName]++
+type Person struct {
+	Name    string
+	Address *Address
+}
+
+func updateAddress(p *Person, street string, city string) {
+	p.Address.Street = street
+	p.Address.City = city
 }
 
 func main() {
-	mapItem := make(map[string]*int)
 
-	increamentCount(mapItem, "apple")
-	increamentCount(mapItem, "apple")
-	increamentCount(mapItem, "apple")
-	increamentCount(mapItem, "apple")
-	increamentCount(mapItem, "orange")
-	increamentCount(mapItem, "orange")
-
-	for itemName, count := range mapItem {
-		fmt.Printf("\nitem: %s, count: %d", itemName, *count)
+	person := Person{
+		Name: "Jakkrit",
+		Address: &Address{
+			Street: "Maple St",
+			City:   "Springfield",
+		},
 	}
+
+	fmt.Printf("Original address: Street: %s, City: %s\n", person.Address.Street, person.Address.City)
+	updateAddress(&person, "Elm St", "Metropolis")
+	fmt.Printf("Updated address: Street: %s, City: %s\n", person.Address.Street, person.Address.City)
 }
