@@ -29,4 +29,8 @@ func main() {
 
 	numMultiply = calculator.PublicMultiply(2, 3)
 	fmt.Println(numMultiply)
+
+	numMultiply = calculator.PublicMultiply(2, 3)
+	fmt.Println(numMultiply)
+
 }
